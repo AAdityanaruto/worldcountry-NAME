@@ -1,0 +1,33 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Countries & Flags | Omkar Nath Singh Ji</title>
+<style>
+:root{--navy:#10213a;--blue:#2357d6;--gold:#f4c95d;--paper:#f5f7fb;--ink:#1d2939}
+*{box-sizing:border-box}body{margin:0;font-family:Arial,Helvetica,sans-serif;color:var(--ink);background:var(--paper)}
+header{background:linear-gradient(135deg,var(--navy),var(--blue));color:white;text-align:center;padding:36px 18px 30px;border-bottom:5px solid var(--gold)}
+.eyebrow{text-transform:uppercase;letter-spacing:3px;font-size:12px;opacity:.85}h1{margin:10px 0;font-size:clamp(27px,5vw,43px)}header p{margin:auto;max-width:700px;line-height:1.6;color:#e8efff}
+main{max-width:1200px;margin:auto;padding:24px 16px 42px}.toolbar{display:flex;gap:12px;flex-wrap:wrap;margin-bottom:12px}
+input,select{border:1px solid #cbd5e1;border-radius:12px;padding:13px 14px;font-size:16px;background:white}input{flex:1;min-width:220px}select{min-width:175px}
+.count{margin:12px 2px 18px;color:#475467;font-size:14px}.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:12px}
+.country{display:flex;align-items:center;gap:12px;padding:15px;background:white;border:1px solid #e4e7ec;border-radius:14px;min-height:78px;box-shadow:0 2px 8px #10213a0a;transition:.15s}
+.country:hover{transform:translateY(-2px);box-shadow:0 8px 20px #10213a12}.flag{font-size:35px;width:44px;text-align:center;flex-shrink:0}.name{font-weight:700;line-height:1.3}.code{color:#667085;font-size:12px;margin-top:5px}
+.empty{text-align:center;padding:45px 10px;color:#667085;display:none}.note{font-size:13px;color:#667085;margin:14px 2px 0}footer{text-align:center;padding:20px;color:#667085;font-size:13px}
+</style></head><body>
+<header><div class="eyebrow">A special world atlas</div><h1>Respected Omkar Nath Singh Ji</h1>
+<p>Welcome! Explore the countries of our beautiful world and discover their national flags.</p></header>
+<main><div class="toolbar"><input id="search" type="search" placeholder="Search a country (e.g. India, Japan…)" aria-label="Search countries">
+<select id="sort" aria-label="Sort countries"><option value="az">Country name: A–Z</option><option value="za">Country name: Z–A</option></select></div>
+<div class="count" id="count" aria-live="polite"></div><section class="grid" id="grid" aria-label="Countries and flags"></section>
+<div class="empty" id="empty">No countries found. Try another search.</div>
+<p class="note">Flags are shown as emoji, so their appearance may vary slightly by device or browser.</p></main>
+<footer>Made with respect for Omkar Nath Singh Ji · Explore the world 🌍</footer>
+<script>
+const raw = 'Afghanistan|AF;Albania|AL;Algeria|DZ;Andorra|AD;Angola|AO;Antigua and Barbuda|AG;Argentina|AR;Armenia|AM;Australia|AU;Austria|AT;Azerbaijan|AZ;Bahamas|BS;Bahrain|BH;Bangladesh|BD;Barbados|BB;Belarus|BY;Belgium|BE;Belize|BZ;Benin|BJ;Bhutan|BT;Bolivia|BO;Bosnia and Herzegovina|BA;Botswana|BW;Brazil|BR;Brunei|BN;Bulgaria|BG;Burkina Faso|BF;Burundi|BI;Cabo Verde|CV;Cambodia|KH;Cameroon|CM;Canada|CA;Central African Republic|CF;Chad|TD;Chile|CL;China|CN;Colombia|CO;Comoros|KM;Congo (Republic of the)|CG;Costa Rica|CR;Côte d’Ivoire|CI;Croatia|HR;Cuba|CU;Cyprus|CY;Czechia|CZ;Democratic Republic of the Congo|CD;Denmark|DK;Djibouti|DJ;Dominica|DM;Dominican Republic|DO;Ecuador|EC;Egypt|EG;El Salvador|SV;Equatorial Guinea|GQ;Eritrea|ER;Estonia|EE;Eswatini|SZ;Ethiopia|ET;Fiji|FJ;Finland|FI;France|FR;Gabon|GA;Gambia|GM;Georgia|GE;Germany|DE;Ghana|GH;Greece|GR;Grenada|GD;Guatemala|GT;Guinea|GN;Guinea-Bissau|GW;Guyana|GY;Haiti|HT;Honduras|HN;Hungary|HU;Iceland|IS;India|IN;Indonesia|ID;Iran|IR;Iraq|IQ;Ireland|IE;Israel|IL;Italy|IT;Jamaica|JM;Japan|JP;Jordan|JO;Kazakhstan|KZ;Kenya|KE;Kiribati|KI;Kuwait|KW;Kyrgyzstan|KG;Laos|LA;Latvia|LV;Lebanon|LB;Lesotho|LS;Liberia|LR;Libya|LY;Liechtenstein|LI;Lithuania|LT;Luxembourg|LU;Madagascar|MG;Malawi|MW;Malaysia|MY;Maldives|MV;Mali|ML;Malta|MT;Marshall Islands|MH;Mauritania|MR;Mauritius|MU;Mexico|MX;Micronesia|FM;Moldova|MD;Monaco|MC;Mongolia|MN;Montenegro|ME;Morocco|MA;Mozambique|MZ;Myanmar|MM;Namibia|NA;Nauru|NR;Nepal|NP;Netherlands|NL;New Zealand|NZ;Nicaragua|NI;Niger|NE;Nigeria|NG;North Korea|KP;North Macedonia|MK;Norway|NO;Oman|OM;Pakistan|PK;Palau|PW;Palestine|PS;Panama|PA;Papua New Guinea|PG;Paraguay|PY;Peru|PE;Philippines|PH;Poland|PL;Portugal|PT;Qatar|QA;Romania|RO;Russia|RU;Rwanda|RW;Saint Kitts and Nevis|KN;Saint Lucia|LC;Saint Vincent and the Grenadines|VC;Samoa|WS;San Marino|SM;Sao Tome and Principe|ST;Saudi Arabia|SA;Senegal|SN;Serbia|RS;Seychelles|SC;Sierra Leone|SL;Singapore|SG;Slovakia|SK;Slovenia|SI;Solomon Islands|SB;Somalia|SO;South Africa|ZA;South Korea|KR;South Sudan|SS;Spain|ES;Sri Lanka|LK;Sudan|SD;Suriname|SR;Sweden|SE;Switzerland|CH;Syria|SY;Tajikistan|TJ;Tanzania|TZ;Thailand|TH;Timor-Leste|TL;Togo|TG;Tonga|TO;Trinidad and Tobago|TT;Tunisia|TN;Türkiye|TR;Turkmenistan|TM;Tuvalu|TV;Uganda|UG;Ukraine|UA;United Arab Emirates|AE;United Kingdom|GB;United States|US;Uruguay|UY;Uzbekistan|UZ;Vanuatu|VU;Vatican City|VA;Venezuela|VE;Vietnam|VN;Yemen|YE;Zambia|ZM;Zimbabwe|ZW';
+const countries=raw.split(";").map(x=>x.split("|"));
+function flagEmoji(code){return [...code].map(c=>String.fromCodePoint(c.charCodeAt(0)+127397)).join("")}
+const grid=document.getElementById("grid"),search=document.getElementById("search"),sort=document.getElementById("sort"),count=document.getElementById("count"),empty=document.getElementById("empty");
+function render(){const q=search.value.trim().toLocaleLowerCase();const list=countries.filter(([n,c])=>n.toLocaleLowerCase().includes(q)||c.toLowerCase().includes(q));list.sort((a,b)=>sort.value==="az"?a[0].localeCompare(b[0]):b[0].localeCompare(a[0]));
+grid.innerHTML=list.map(([n,c])=>`<article class="country"><div class="flag" role="img" aria-label="${n} flag">${flagEmoji(c)}</div><div><div class="name">${n}</div><div class="code">Country code: ${c}</div></div></article>`).join("");
+count.textContent=`Showing ${list.length} of ${countries.length} countries and flags`;empty.style.display=list.length?"none":"block"}
+search.addEventListener("input",render);sort.addEventListener("change",render);render();
+</script></body></html>
